@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>abrhoda.github.io</title>
+    <description>Building neat software.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 07 Oct 2022 17:21:40 -0400</pubDate>
+    <lastBuildDate>Fri, 07 Oct 2022 17:21:40 -0400</lastBuildDate>
+    <generator>Jekyll v3.9.2</generator>
+    
+      <item>
+        <title>Makefile Help Target With Descriptions</title>
+        <description>&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make&lt;/code&gt; and Makefiles are a utility tool to automate tasks by running what are called targets which are made up of prerequisites and individual steps. A quick example is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build&lt;/code&gt; target invoked by calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make build&lt;/code&gt; which might have a prerequisite to bring the project to a clean state by running a target of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clean&lt;/code&gt; and then steps to build the project locally. You can read more about make and Makefile &lt;a href=&quot;https://www.gnu.org/software/make/manual/make.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Below is an example for a self documenting Makefile where every target is printed to the console along with a help message. Invoking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build help&lt;/code&gt; will print out each target’s help message after the “##” string.&lt;/p&gt;
+
+&lt;div class=&quot;language-make highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean main.o &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; build test app&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;g++&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;main.o&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;testapp&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;main.o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main.cpp &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; builds main.o&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;g++&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;main.cpp&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;clean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; remove built files&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;-f&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;*o&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;testapp&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;help&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;help&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; print this help message&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;@awk -F &apos;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&apos; &apos;/^[^&lt;/span&gt;\t&lt;span class=&quot;nf&quot;&gt;].+?:.*?&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;/ {printf &quot;&lt;/span&gt;\0&lt;span class=&quot;nf&quot;&gt;33[36m%-20s&lt;/span&gt;\0&lt;span class=&quot;nf&quot;&gt;33[0m %s&lt;/span&gt;\n&lt;span class=&quot;nf&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; $$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; $$NF}&apos; $(MAKEFILE_LIST)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Example output can be seen below.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;build                 build test app
+main.o                builds main.o
+clean                 remove built files
+help                  print this help message
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 07 Oct 2022 16:41:23 -0400</pubDate>
+        <link>http://localhost:4000/makefile-help-targets-with-descriptions/</link>
+        <guid isPermaLink="true">http://localhost:4000/makefile-help-targets-with-descriptions/</guid>
+        
+        
+        <category>tips</category>
+        
+        <category>automation</category>
+        
+      </item>
+    
+  </channel>
+</rss>
