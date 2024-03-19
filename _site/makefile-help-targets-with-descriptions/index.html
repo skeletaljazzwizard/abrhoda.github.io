@@ -31,7 +31,7 @@
     
 
     
-      <meta content="2022-10-07T16:41:23-04:00" property="article:published_time">
+      <meta content="2024-03-19T00:00:00-04:00" property="article:published_time">
       <meta content="http://localhost:4000/about/" property="article:author">
     
 
@@ -122,7 +122,7 @@
   <h1 class="post-title">Makefile Help Target With Descriptions</h1>
 </header>
 
-<span class="time">07 Oct 2022</span>
+<span class="time">19 Mar 2024</span>
 
   <span class="categories">
     &raquo; <a href="/category/tips">tips</a>, <a href="/category/automation">automation</a>
@@ -134,15 +134,15 @@
 
 <p>Below is an example for a self documenting Makefile where every target is printed to the console along with a help message. Invoking <code class="language-plaintext highlighter-rouge">build help</code> will print out each target’s help message after the “##” string.</p>
 
-<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">build</span><span class="o">:</span> <span class="nf">clean main.o </span><span class="c">##</span><span class="nf"> build test app</span>
-  <span class="err">g++</span> <span class="err">main.o</span> <span class="err">-o</span> <span class="err">testapp</span>
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">build</span><span class="o">:</span> <span class="nf">clean main.o </span><span class="c">##</span><span class="nf"> calls the `clean` recipe and then builds `proj.o`</span>
+  <span class="err">gcc</span> <span class="err">main.o</span> <span class="err">-o</span> <span class="err">proj</span>
 
 <span class="nl">main.o</span><span class="o">:</span> <span class="nf">main.cpp </span><span class="c">##</span><span class="nf"> builds main.o</span>
-  <span class="err">g++</span> <span class="err">-c</span> <span class="err">main.cpp</span>
+  <span class="err">gcc</span> <span class="err">main.cpp</span>
 
 <span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">clean</span>
 <span class="nl">clean</span><span class="o">:</span> <span class="c">##</span><span class="nf"> remove built files</span>
-  <span class="err">rm</span> <span class="err">-f</span>  <span class="err">*o</span> <span class="err">testapp</span>
+  <span class="err">rm</span> <span class="err">-f</span>  <span class="err">*o</span> <span class="err">proj</span>
 
 <span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">help</span>
 <span class="nl">help</span><span class="o">:</span> <span class="c">##</span><span class="nf"> print this help message</span>
@@ -150,7 +150,7 @@
 </code></pre></div></div>
 
 <p>Example output can be seen below.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build                 build test app
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build                 calls the `clean` recipe and then builds `proj.o` 
 main.o                builds main.o
 clean                 remove built files
 help                  print this help message

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Makefile Help Target With Descriptions"
-date:   2022-10-07 16:41:23 -0400
+date:   2024-03-19 00:00:00 -0400
 categories: [tips, automation]
 ---
 
@@ -10,15 +10,15 @@ categories: [tips, automation]
 Below is an example for a self documenting Makefile where every target is printed to the console along with a help message. Invoking `build help` will print out each target’s help message after the “##” string.
 
 ```make
-build: clean main.o ## build test app
-  g++ main.o -o testapp
+build: clean main.o ## calls the `clean` recipe and then builds `proj.o`
+  gcc main.o -o proj
 
 main.o: main.cpp ## builds main.o
-  g++ -c main.cpp
+  gcc main.cpp
 
 .PHONY: clean
 clean: ## remove built files
-  rm -f  *o testapp
+  rm -f  *o proj
 
 .PHONY: help
 help: ## print this help message
@@ -27,7 +27,7 @@ help: ## print this help message
 
 Example output can be seen below.
 ```
-build                 build test app
+build                 calls the `clean` recipe and then builds `proj.o` 
 main.o                builds main.o
 clean                 remove built files
 help                  print this help message
